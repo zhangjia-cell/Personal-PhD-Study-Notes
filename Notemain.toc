@@ -1,0 +1,72 @@
+\contentsline {chapter}{\numberline {1}第一章：数学工具篇}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}分析篇}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}代数篇}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}概率论与数理统计篇}{1}{section.1.3}%
+\contentsline {section}{\numberline {1.4}数论篇}{1}{section.1.4}%
+\contentsline {section}{\numberline {1.5}实变函数篇}{1}{section.1.5}%
+\contentsline {section}{\numberline {1.6}泛函分析篇}{1}{section.1.6}%
+\contentsline {section}{\numberline {1.7}常微分方程篇}{1}{section.1.7}%
+\contentsline {section}{\numberline {1.8}拓扑篇}{1}{section.1.8}%
+\contentsline {chapter}{\numberline {2}第二章：理论分析证明框架汇总}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}零阶优化算法}{2}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}相关概念}{2}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}常见的假设}{2}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}收敛性分析}{2}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}内存分析}{2}{section.2.2}%
+\contentsline {chapter}{\numberline {3}第三章：AI 代码整理}{3}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Pytorch 辅助性工具}{3}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}日志管理}{3}{subsection.3.1.1}%
+\contentsline {subsubsection}{基本日志配置}{3}{subsection.3.1.1}%
+\contentsline {subsubsection}{日志文件管理}{4}{lstnumber.3.1.31}%
+\contentsline {subsubsection}{查看和解析日志文件}{5}{lstnumber.3.2.55}%
+\contentsline {subsubsection}{将日志信息整理到表格}{6}{lstnumber.3.3.27}%
+\contentsline {subsection}{\numberline {3.1.2}终端自动化调参}{6}{subsection.3.1.2}%
+\contentsline {subsubsection}{shell-基础语法}{6}{subsection.3.1.2}%
+\contentsline {paragraph}{声明变量}{7}{subsection.3.1.2}%
+\contentsline {paragraph}{if-else}{7}{lstnumber.3.5.6}%
+\contentsline {paragraph}{case嵌套}{7}{lstnumber.3.6.9}%
+\contentsline {paragraph}{for循环}{7}{lstnumber.3.7.22}%
+\contentsline {paragraph}{while循环}{8}{lstnumber.3.8.4}%
+\contentsline {paragraph}{until循环}{8}{lstnumber.3.9.6}%
+\contentsline {paragraph}{函数语法}{8}{lstnumber.3.10.6}%
+\contentsline {paragraph}{文件操作}{8}{lstnumber.3.11.6}%
+\contentsline {subsubsection}{shell-参数自动化调整}{8}{lstnumber.3.12.6}%
+\contentsline {paragraph}{自动化调参python-part}{8}{lstnumber.3.12.6}%
+\contentsline {paragraph}{自动化调参shell-part}{9}{lstnumber.3.13.26}%
+\contentsline {subsection}{\numberline {3.1.3}进度条设置}{10}{subsection.3.1.3}%
+\contentsline {paragraph}{基本用法}{10}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}查询服务器显卡属性设置}{11}{subsection.3.1.4}%
+\contentsline {paragraph}{训练显存消耗记录}{11}{subsection.3.1.4}%
+\contentsline {paragraph}{训练时长消耗记录}{11}{lstnumber.3.16.35}%
+\contentsline {subsection}{\numberline {3.1.5}wandb学习}{12}{subsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.1.6}Github 项目管理}{14}{subsection.3.1.6}%
+\contentsline {subsection}{\numberline {3.1.7}Tikz的使用查询}{14}{subsection.3.1.7}%
+\contentsline {paragraph}{基础环境}{14}{subsection.3.1.7}%
+\contentsline {paragraph}{图形绘制}{14}{lstnumber.3.19.4}%
+\contentsline {paragraph}{曲线绘制}{14}{lstnumber.3.19.4}%
+\contentsline {section}{\numberline {3.2}训练模型的简易流程}{16}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}基本流程}{16}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}基本代码模块详解}{17}{subsection.3.2.2}%
+\contentsline {subsubsection}{A.数据准备}{17}{subsection.3.2.2}%
+\contentsline {subsubsection}{B.定义模型}{18}{lstnumber.3.20.8}%
+\contentsline {subsubsection}{C.定义损失函数和优化器}{18}{lstnumber.3.20.8}%
+\contentsline {subsubsection}{D.训练模型}{18}{lstnumber.3.20.8}%
+\contentsline {subsubsection}{E.训练和测试}{18}{lstnumber.3.20.8}%
+\contentsline {subsection}{\numberline {3.2.3}定制代码模块详解}{18}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}研究领域和代码编写示例}{19}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}图像识别(Computer Vision)}{19}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}自然语言处理(Natural Language Processing)}{19}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}生成时学习(Generative Learning)}{19}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}多模态(Multimodal)}{19}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}脉冲神经网络相关(SNN)}{19}{subsection.3.3.5}%
+\contentsline {chapter}{\numberline {4}第四章：AI 知识整理}{20}{chapter.4}%
+\contentsline {chapter}{\numberline {5}第五章：文章汇总整理}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}黑盒-零阶优化问题}{21}{section.5.1}%
+\contentsline {section}{\numberline {5.2}大模型微调相关}{21}{section.5.2}%
+\contentsline {section}{\numberline {5.3}SNN相关[校准]}{21}{section.5.3}%
+\contentsline {section}{\numberline {5.4}SNN相关[量化]}{21}{section.5.4}%
+\contentsline {section}{\numberline {5.5}SNN相关[马尔可夫]}{21}{section.5.5}%
+\contentsline {section}{\numberline {5.6}SNN相关[编码]}{21}{section.5.6}%
+\contentsline {chapter}{\numberline {6}第六章：技术汇总整理}{22}{chapter.6}%
+\contentsline {chapter}{\numberline {7}第七章：项目练习}{23}{chapter.7}%
+\contentsfinish 

@@ -1,0 +1,758 @@
+\section{Pytorch 辅助性工具}
+
+% --------------------------------------------------------------------------------------------- %
+% --------------------------------------------------------------------------------------------- %
+\subsection{日志管理}
+在软件开发、系统运维等领域，logging 日志是一种非常重要的记录机制，其核心作用是追踪系统运行过程中的关键信息、行为和状态，以便于后续的调试、监控、分析和问题排查。
+% --------------------------------------------------------------------------------------------- %
+\subsubsection{基本日志配置}
+基本示例如下：
+\begin{lstlisting}[language=python,caption={基本日志配置},label=code:log_configuration]
+	import logging
+	import os
+	from datetime import datetime
+	
+	def setup_logger(log_dir="logs"):
+		# 创建日志目录
+		if not os.path.exists(log_dir):
+		os.makedirs(log_dir)
+	
+		# 日志文件名：包含时间戳
+		timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+		log_file = os.path.join(log_dir, f"training_{timestamp}.log")
+	
+		# 配置日志
+		logging.basicConfig(
+		level=logging.INFO,  # 日志级别：DEBUG, INFO, WARNING, ERROR, CRITICAL
+		format="%(asctime)s-%(name)s-%(levelname)s-%(message)s",
+		handlers=[
+		logging.FileHandler(log_file),  # 输出到文件
+		logging.StreamHandler()         # 同时输出到控制台
+		]
+		)
+	
+		return logging.getLogger(__name__)
+	
+	# 使用示例
+	logger = setup_logger()
+	logger.debug("这是调试信息")    # 不会显示，因为级别是INFO
+	logger.info("训练开始")        # 会显示
+	logger.warning("学习率可能过高")
+	logger.error("数据加载失败")
+\end{lstlisting}
+
+
+% --------------------------------------------------------------------------------------------- %
+\subsubsection{日志文件管理}
+基本示例如下：
+\begin{lstlisting}[language=python,caption={日志文件的轮转},label=code:Log_File_Management]
+	import logging
+	from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
+	import os
+	
+	def setup_advanced_logger(log_dir="logs"):
+		if not os.path.exists(log_dir):
+		os.makedirs(log_dir)
+	
+		logger = logging.getLogger(__name__)
+		logger.setLevel(logging.INFO)
+	
+		# 格式设置
+		formatter = logging.Formatter("%(asctime)s-%(name)s-%(levelname)s-%(message)s")
+	
+		# 按大小轮转：每个文件最大10MB，保留5个备份
+		file_handler = RotatingFileHandler(
+		os.path.join(log_dir, "training.log"),
+		maxBytes=10*1024*1024,  # 10MB
+		backupCount=5,
+		encoding="utf-8"
+		)
+	
+		# 或者按时间轮转：每天一个日志文件
+		# file_handler = TimedRotatingFileHandler(
+		#     os.path.join(log_dir, "training.log"),
+		#     when="D",  # 每天轮转
+		#     interval=1,
+		#     backupCount=7,  # 保留7天
+		#     encoding="utf-8"
+		# )
+	
+		file_handler.setFormatter(formatter)
+		logger.addHandler(file_handler)
+	
+		# 同时输出到控制台
+		console_handler = logging.StreamHandler()
+		console_handler.setFormatter(formatter)
+		logger.addHandler(console_handler)
+	
+		return logger
+	
+	# 在PyTorch训练中的使用示例
+	def train_model(logger):
+	logger.info("开始模型训练")
+	for epoch in range(10):
+	logger.info(f"=====第{epoch+1}轮训练=====")
+	# 训练代码...
+	loss = 0.5 - epoch*0.05  # 示例损失值
+	accuracy = 0.6 + epoch*0.03  # 示例准确率
+	logger.info(f"损失:{loss:.4f},准确率:{accuracy:.4f}")
+	
+	if loss < 0.2:
+	logger.warning("损失值过低，可能存在过拟合风险")
+	
+	logger.info("模型训练完成")
+\end{lstlisting}
+
+
+% --------------------------------------------------------------------------------------------- %
+\subsubsection{查看和解析日志文件}
+基本示例如下：
+\begin{lstlisting}[language=python,caption={解析日志文件},label=code:View_and_parse_logs]
+	import re
+	import pandas as pd
+	
+	def parse_log_file(log_path):
+		"""解析日志文件，提取训练指标"""
+		# 正则表达式匹配训练指标行
+		pattern = r"(\d{4}-\d{2}-\d{2}\d{2}:\d{2}:\d{2})-.*-INFO-损失:([\d.]+),准确率:([\d.]+)"
+	
+		data = []
+		with open(log_path, "r", encoding="utf-8") as f:
+		for line in f:
+			match = re.match(pattern, line.strip())
+			if match:
+				timestamp = match.group(1)
+				loss = float(match.group(2))
+				accuracy = float(match.group(3))
+			data.append({
+				"timestamp": timestamp,
+				"loss": loss,
+				"accuracy": accuracy
+			})
+	
+		return pd.DataFrame(data)
+	
+	# 使用示例
+	# df = parse_log_file("logs/training.log")
+	# print(df)
+\end{lstlisting}
+
+
+
+
+% --------------------------------------------------------------------------------------------- %
+\subsubsection{将日志信息整理到表格}
+基本示例如下：
+\begin{lstlisting}[language=python,caption={输出至表格},label=code:To_table]
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	
+	def log_to_dataframe_and_visualize(log_path):
+		# 解析日志文件
+		df = parse_log_file(log_path)
+	
+		if df.empty:
+		print("没有找到有效的训练指标数据")
+		return
+	
+	# 保存为CSV文件
+	df.to_csv("training_metrics.csv", index=False)
+	print("训练指标已保存到 training_metrics.csv")
+	
+	# 可视化
+	plt.figure(figsize=(12, 5))
+	
+	plt.subplot(1, 2, 1)
+	plt.plot(df["loss"])
+	plt.title("训练损失")
+	plt.xlabel("轮次")
+	plt.ylabel("损失值")
+	
+	plt.subplot(1, 2, 2)
+	plt.plot(df["accuracy"])
+	plt.title("训练准确率")
+	plt.xlabel("轮次")
+	plt.ylabel("准确率")
+	
+	plt.tight_layout()
+	plt.savefig("training_metrics.png")
+	plt.show()
+	
+	return df
+	
+	# 使用示例
+	# metrics_df = log_to_dataframe_and_visualize("logs/training.log")
+\end{lstlisting}
+
+% --------------------------------------------------------------------------------------------- %
+% --------------------------------------------------------------------------------------------- %
+\subsection{终端自动化调参}
+在深度学习（尤其是 PyTorch 训练）和日常开发中，shell 脚本（.sh 文件）是一种极其实用的工具，它的核心作用是自动化重复操作、批量执行命令、管理复杂工作流。
+% --------------------------------------------------------------------------------------------- %
+\subsubsection{shell-基础语法}
+一些常见的语法可供查阅
+
+\paragraph{声明变量}
+\begin{lstlisting}[language=sh,caption={声明变量},label=code:shell_base1]
+	# 声明一个变量
+	name="John"
+	# 声明变量并设置默认值
+	name=${name:-zj}
+	# 使用变量
+	echo "Hello, $name!"  # 输出: Hello, John!
+\end{lstlisting}
+
+
+\paragraph{if-else}
+\begin{lstlisting}[language=sh,caption={if-else语法},label=code:shell_base2]
+	age=20
+	# -eq:等于,--ne:不等于,-gt:大于,-lt:小于,-ge:大于等于,-le:小于等于
+	if [ $age -ge 18 ]; then
+	echo "You are an adult."
+	elif
+	echo "You are a minor."
+	else
+	echo "NO."
+	fi	
+\end{lstlisting}
+
+\paragraph{case嵌套}
+\begin{lstlisting}[language=sh,caption={case嵌套循环示例代码},label=code:shell_base3]
+	case $TASK in
+		CB)
+			DEV=100
+			;;
+		Copa)
+			DEV=100
+			TASK_ARGS="--train_as_classification False"
+			;;
+		MultiRC)
+			GA=$(expr $BS / 2)
+			BS=2
+			TASK_ARGS="--gradient_accumulation_steps $GA"
+			;;
+		ReCoRD)
+			GA=$(expr $BS / 2)
+			BS=2
+			TASK_ARGS="--gradient_accumulation_steps $GA --train_as_classification False"
+			;;
+		*)
+			# 默认处理
+			;;
+	esac
+\end{lstlisting}
+
+\paragraph{for循环}
+\begin{lstlisting}[language=sh,caption={for-循环语法},label=code:shell_base4]
+	# 输出 1 到 5 的数字
+	for i in {1..5}; do
+		echo "Number $i"
+	done
+\end{lstlisting}
+
+
+\paragraph{while循环}
+\begin{lstlisting}[language=sh,caption={while-循环语法},label=code:shell_base5]
+	# 输出 1 到 5 的数字
+	i=1
+	while [ $i -le 5 ]; do
+		echo "Number $i"
+		i=$((i + 1))
+	done
+\end{lstlisting}
+
+
+\paragraph{until循环}
+\begin{lstlisting}[language=sh,caption={until-循环语法},label=code:shell_base6]
+	# 输出 1 到 5 的数字
+	i=1
+	until [ $i -gt 5 ]; do
+		echo "Number $i"
+		i=$((i + 1))
+	done
+\end{lstlisting}
+
+
+\paragraph{函数语法}
+\begin{lstlisting}[language=sh,caption={函数},label=code:shell_base7]
+	# 定义函数
+	greet() {
+		echo "Hello, $1!"
+	}
+	# 调用函数
+	greet "Alice"  # 输出: Hello, Alice!
+\end{lstlisting}
+
+
+\paragraph{文件操作}
+\begin{lstlisting}[language=sh,caption={文件操作},label=code:shell_base8]
+	touch myfile.txt  # 创建一个空文件
+	echo "This is a test." > myfile.txt  # 覆盖写入
+	echo "Another line." >> myfile.txt  # 追加写入
+	cat myfile.txt  # 显示文件内容
+	rm myfile.txt  # 删除文件
+	...
+\end{lstlisting}
+
+\subsubsection{shell-参数自动化调整}
+
+\paragraph{自动化调参python-part}
+\begin{lstlisting}[language=python,caption={调参},label=code:shell_tuning_py]
+	import argparse
+	from transformers import Trainer, TrainingArguments
+	
+	# 定义训练参数类
+	@dataclass
+	class OurArguments(TrainingArguments):
+		task_name: str = "SST2"
+		num_train: int = 0
+		model_name: str = "facebook/opt-125m"
+		# 其他参数...
+	
+	def parse_args():
+		parser = argparse.ArgumentParser(description="Training script.")
+		# 添加你的参数
+		parser.add_argument("--task_name", type=str, default="SST2", help="Task name")
+		parser.add_argument("--num_train", type=int, default=0, help="Number of training samples")
+		parser.add_argument("--model_name", type=str, default="facebook/opt-125m", help="Model name")
+		# 可以继续添加其他参数
+		return parser.parse_args()
+	
+	def main():
+		# 解析命令行参数
+		args = parse_args()
+	
+	if __name__ == "__main__":
+	main()
+\end{lstlisting}
+
+
+\paragraph{自动化调参shell-part}
+\begin{lstlisting}[language=sh,caption={调参},label=code:shell_tuning_sh]
+	#!/bin/bash
+	
+	# 定义任务、模型和训练样本数量的不同配置
+	TASKS=("SST2" "RTE" "CB")
+	MODEL_NAMES=("facebook/opt-125m" "google/bert-large-uncased")
+	NUM_TRAIN_VALUES=(100 200 300)
+	
+	# 自动化调参
+	for TASK in "${TASKS[@]}"
+	do
+		for MODEL in "${MODEL_NAMES[@]}"
+		do
+			for NUM_TRAIN in "${NUM_TRAIN_VALUES[@]}"
+			do
+				echo "Running for Task: $TASK, Model: $MODEL, Num_train: $NUM_TRAIN"
+	
+				# 执行 Python 脚本并传递参数
+				python train.py --task_name $TASK --model_name $MODEL --num_train $NUM_TRAIN
+			done
+		done
+	done
+\end{lstlisting}
+
+% --------------------------------------------------------------------------------------------- %
+% --------------------------------------------------------------------------------------------- %
+\subsection{进度条设置}
+进度条需要采用tqdm包，基本使用方法如下：
+\paragraph{基本用法}
+\begin{lstlisting}[language=python,caption={示例},label=code:tqdb]
+	from tqdm import tqdm
+	import time
+	
+	## 1.基本用法
+	# 普通循环（没有进度条）
+	# for i in range(100):
+	#     time.sleep(0.05)  # 模拟耗时操作
+	
+	# 用 tqdm 包装后（有进度条）
+	for i in tqdm(range(100), desc="Processing", unit="单位"):
+		time.sleep(0.05)  # 模拟耗时操作
+		
+	## 2.包装列表等可迭代对象
+	items = ["a", "b", "c", "d", "e"] * 20  # 构造一个列表
+	
+	# 包装列表
+	for item in tqdm(items, desc="Processing items"):
+		time.sleep(0.1)  # 模拟处理每个元素的耗时
+	
+	## 3.手动更新进度条
+	# 创建进度条对象，总步数为 3
+	pbar = tqdm(total=3, desc="手动更新")
+	# 第一步
+	time.sleep(1)
+	pbar.update(1)  # 进度 +1
+	# 第二步
+	time.sleep(1)
+	pbar.update(1)  # 进度 +1
+	# 第三步
+	time.sleep(1)
+	pbar.update(1)  # 进度 +1
+	pbar.close()  # 关闭进度条
+	
+	## 4.在嵌套循环中使用
+	epochs = 3  # 总轮次
+	batchs_per_epoch = 10  # 每轮的批次
+	
+	# 外层循环：总训练进度
+	global_pbar = tqdm(total=epochs * batchs_per_epoch, desc="总进度")
+	
+	for epoch in range(epochs):
+		# 内层循环：当前epoch的进度（leave=False 表示完成后清除）
+		epoch_pbar = tqdm(range(batchs_per_epoch), 
+		desc=f"第 {epoch+1} 轮", 
+		leave=False)
+	
+		for batch in epoch_pbar:
+			time.sleep(0.2)  # 模拟训练一个批次
+			global_pbar.update(1)  # 总进度 +1
+			epoch_pbar.set_postfix(loss=0.5 - epoch*0.1)  # 显示额外信息（如损失）
+		
+		epoch_pbar.close()
+		
+	global_pbar.close()
+\end{lstlisting}
+
+% --------------------------------------------------------------------------------------------- %
+% --------------------------------------------------------------------------------------------- %
+\subsection{查询服务器显卡属性设置}
+
+\paragraph{训练显存消耗记录}
+\begin{lstlisting}[language=python,caption={查询显存},label=code:train_memory]
+	import torch
+	
+	def track_gpu_memory(step_name):
+		# 当前已分配显存
+		current = torch.cuda.memory_allocated() / 1024**3
+		# 历史最大显存（峰值）
+		peak = torch.cuda.max_memory_allocated() / 1024**3
+		# 重置峰值统计（可选，用于分阶段监控）
+		# torch.cuda.reset_peak_memory_stats()
+		print(f"[{step_name}] 显存: 当前 {current:.2f}GB | 峰值 {peak:.2f}GB")
+	
+	# 训练循环中关键节点调用
+	for epoch in range(epochs):
+		for inputs, labels in dataloader:
+			# 前向传播前
+			track_gpu_memory("前向传播前")
+			
+			# 前向传播
+			outputs = model(inputs)
+			loss = criterion(outputs, labels)
+			track_gpu_memory("前向传播后")
+			
+			# 反向传播
+			optimizer.zero_grad()
+			loss.backward()
+			track_gpu_memory("反向传播后")
+			
+			# 优化器更新
+			optimizer.step()
+			track_gpu_memory("优化器更新后")
+			
+			# 清空当前批次变量
+			del inputs, labels, outputs, loss
+			torch.cuda.empty_cache()  # 手动触发缓存清理（可选）
+			track_gpu_memory("批次结束后")
+\end{lstlisting}
+
+\paragraph{训练时长消耗记录}
+\begin{lstlisting}[language=python,caption={训练时长记录},label=code:train_time]
+	import time
+	from datetime import timedelta
+	
+	# 记录开始时间
+	start_time = time.time()
+	
+	# 训练代码...
+	for epoch in range(epochs):
+		# 训练过程
+		pass
+	
+	# 计算总时长
+	total_time = time.time() - start_time
+	print(f"总运行时间: {timedelta(seconds=int(total_time))}")
+\end{lstlisting}
+
+% --------------------------------------------------------------------------------------------- %
+% --------------------------------------------------------------------------------------------- %
+\subsection{wandb学习}
+演示示例如下：
+\begin{lstlisting}[language=python,caption={wandb记录},label=code:wandb]
+	import wandb
+	import random
+	import numpy as np
+	import os
+	
+	def main():
+		# 1. wandb登录过程
+		print("===== 登录到Weights & Biases =====")
+		try:
+			# 尝试检查登录状态
+			api = wandb.Api()
+			print("已登录到wandb")
+		except Exception:
+			print("未检测到登录状态，需要进行登录")
+			# 优先从环境变量获取API密钥（适合服务器环境）
+			api_key = os.getenv("WANDB_API_KEY")
+			if api_key:
+				wandb.login(key=api_key)
+				print("通过环境变量成功登录")
+			else:
+				# 交互式登录（适合本地开发）
+				print("请在弹出的浏览器中登录，或输入API密钥")
+				wandb.login()
+		
+		# 2. 初始化wandb实验
+		print("\n===== 初始化实验 =====")
+			run = wandb.init(
+			project="wandb-complete-demo",  # 项目名称
+			name=f"demo-run-{random.randint(1000, 9999)}",  # 实验名称，包含随机数避免重复
+			notes="这是一个wandb完整功能演示",  # 实验备注
+			tags=["demo", "tutorial"],  # 实验标签
+			config={  # 超参数配置
+				"learning_rate": 0.01,
+				"epochs": 20,
+				"batch_size": 32,
+				"optimizer": "Adam",
+				"dataset": "synthetic"
+			}
+		)
+		
+		# 获取配置
+		config = wandb.config
+		
+		# 3. 模拟训练数据
+		print("\n===== 开始训练 =====")
+		# 生成模拟数据分布的参数
+		true_mean = 0.5
+		true_std = 0.2
+		
+		# 4. 训练循环
+		for epoch in range(config.epochs):
+			# 模拟训练过程中的指标
+			# 随着epoch增加，损失应该下降，准确率应该上升
+			loss = (true_mean + np.random.normal(0, true_std)) / (epoch + 1)
+			accuracy = 0.5 + (epoch / config.epochs) * 0.4 + np.random.normal(0, 0.03)
+			accuracy = min(accuracy, 0.98)  # 限制最大准确率
+			
+			# 记录指标到wandb
+			wandb.log({
+				"training/loss": loss,
+				"training/accuracy": accuracy,
+				"training/epoch": epoch,
+				# 可以记录更多衍生指标
+				"training/loss_derivative": loss * 0.1 if epoch > 0 else 0
+			})
+			
+			# 打印进度
+			if epoch % 5 == 0:  # 每5个epoch打印一次
+				print(f"Epoch {epoch:2d}/{config.epochs}: "
+					f"Loss = {loss:.4f}, "
+					f"Accuracy = {accuracy:.4f}")
+		
+		# 5. 完成实验
+		print("\n===== 训练完成 =====")
+		wandb.finish()
+		print(f"实验已成功记录，可在以下地址查看：")
+		print(f"https://wandb.ai/{wandb.run.entity}/{config.project}/runs/{wandb.run.id}")
+	
+	if __name__ == "__main__":
+	main()
+\end{lstlisting}
+
+
+
+% --------------------------------------------------------------------------------------------- %
+% --------------------------------------------------------------------------------------------- %
+\subsection{Github 项目管理}
+
+
+
+
+
+% --------------------------------------------------------------------------------------------- %
+% --------------------------------------------------------------------------------------------- %
+\subsection{Tikz的使用查询}
+\paragraph{基础环境}
+\begin{lstlisting}[language=tex,caption={tikz基础},label=code:tikz1]
+	\usepackage{tikz} 
+	\begin{tikzpicture}
+		...
+	\end{tikzpicture}
+\end{lstlisting}
+
+\paragraph{图形绘制}
+示例代码和图片：
+
+\begin{minipage}{0.25\textwidth} 
+	\centering
+	\begin{tikzpicture}
+		\draw (1,3)--(2,2)--(4,5)--(1,3);
+	\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{0.25\textwidth} 
+	\centering
+	\begin{tikzpicture}
+		\draw (1,1) circle (1);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.25\textwidth} 
+	\centering
+	\begin{tikzpicture}
+		\draw (1,1) ellipse (2 and 1);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.25\textwidth} 
+	\centering
+	\begin{tikzpicture}
+		\draw (6 ,1) arc (0:270:2 and 1);
+	\end{tikzpicture}
+\end{minipage}
+
+\paragraph{曲线绘制}
+
+\begin{minipage}{0.25\textwidth} 
+	\centering
+	\begin{tikzpicture}
+		\draw (5,1) parabola bend (6,0) (7.414 ,2);
+		\filldraw (5,1) circle (.1)
+		(6,0) circle (.1)
+		(7.414 ,2) circle (.1);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.25\textwidth} 
+	\centering
+	\begin{tikzpicture}
+		\draw [step=20pt] (0,0) grid (3,2);
+		\draw [help lines ,step=20pt] (4,0) grid (7,2);
+	\end{tikzpicture}
+\end{minipage}
+
+\begin{minipage}{0.25\textwidth} 
+	\centering
+	\begin{tikzpicture}
+		\draw [->] (0,0)--(9,0);
+		\draw [<-] (0,1)--(9,1);
+		\draw [<->] (0,2)--(9,2);
+		\draw [>->>] (0,3)--(9,3);
+		\draw [|<->|] (0,4)--(9,4);
+	\end{tikzpicture}
+\end{minipage}
+
+\begin{minipage}{0.25\textwidth} 
+	\centering
+	\begin{tikzpicture}
+		\draw [line width =2pt] (0,0)--(9,0); %加粗实线
+		\draw [dotted] (0,1)--(9,1); %点状虚线
+		\draw [densely dotted] (0,2)--(9,2); %较密的点状虚线
+		\draw [loosely dotted] (0,3)--(9,3); %较疏的点状虚线
+		\draw [dashed] (0,4)--(9,4); %线状虚线
+		\draw [densely dashed] (0,5)--(9,5); %较密的线状虚线
+		\draw [loosely dashed] (0,6)--(9,6); %较疏的线状虚线
+	\end{tikzpicture}
+\end{minipage}
+
+
+\begin{tikzpicture}
+	\centering
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=blue] (1) at(0,2){$x_1$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=blue] (2) at(0,0){$x_2$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=orange] (3) at(2,-1){$a_3^{(2)}$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=orange] (4) at(2,1){$a_2^{(2)}$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=orange] (5) at(2,3){$a_1^{(2)}$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=orange] (6) at(4,-1){$a_3^{(3)}$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=orange] (7) at(4,1){$a_2^{(3)}$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=orange] (8) at(4,3){$a_1^{(3)}$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=purple] (9) at(6,2){$a_1^{(4)}$};
+	\node[circle,
+	minimum width =30pt ,
+	minimum height =30pt ,draw=purple] (10) at(6,0){$a_2^{(4)}$};
+	\draw[->] (1) --(3);
+	\draw[->] (1) --(4);
+	\draw[->] (1) --(5);
+	\draw[->] (2) --(3);
+	\draw[->] (2) --(4);
+	\draw[->] (2) --(5);
+	\draw[->] (3) --(6);
+	\draw[->] (3) --(7);
+	\draw[->] (3) --(8);
+	\draw[->] (4) --(6);
+	\draw[->] (4) --(7);
+	\draw[->] (4) --(8);
+	\draw[->] (5) --(6);
+	\draw[->] (5) --(7);
+	\draw[->] (5) --(8);
+	\draw[->] (6) --(9);
+	\draw[->] (6) --(10);
+	\draw[->] (7) --(9);
+	\draw[->] (7) --(10);
+	\draw[->] (8) --(9);
+	\draw[->] (8) --(10);
+\end{tikzpicture}
+
+\begin{minipage}{0.5\textwidth}
+\begin{tikzpicture}
+	\draw[->] (-0.2,0) --(6,0) node[right] {$x$};
+	\draw[->] (0,-0.2) --(0,6) node[above] {$f(x)$};
+	\draw[domain =0:4] plot (\x ,{0.1* exp(\x)}) node[right] {$f(x)=\frac{1}{10}e^x$};
+\end{tikzpicture}	
+\end{minipage}
+
+\begin{minipage}{0.5\textwidth}
+\begin{tikzpicture}
+	\coordinate (A) at (2,0,0);
+	\coordinate (B) at (2,1,0);
+	\coordinate (C) at (0,1,0);
+	\coordinate (D) at (0,0,0);
+	\coordinate (A1) at (2,0,2);
+	\coordinate (B1) at (2,1,2);
+	\coordinate (C1) at (0,1,2);
+	\coordinate (D1) at (0,0,2);
+	\coordinate (E) at (1,1,0);
+	\coordinate (M) at (2,1,1);
+	\coordinate (N) at (1,0,1);
+	
+	\draw[rounded corners=0.05pt](A1)circle (0.25pt)node[left=-2pt]{$A_1$}--
+	(B1)circle (0.25pt)node[above]{$B_1$}--
+	(C1)circle (0.25pt)node[above=1pt]{$C_1$}--
+	(D1)circle (0.25pt)node[above=1pt]{$D_1$}--(A1)--cycle
+	(A)circle (0.25pt)node[below=-2pt]{$A$}--
+	(B)circle (0.25pt)node[below=-2pt]{$B$}--
+	(C)circle (0.25pt)node[right=-2pt]{$C$}
+	(A1)--(A)(B1)--(B)(C1)--(C)(E)--(M)
+	(C1)--(M)circle (0.25pt)node[left=1pt]{$E$}
+	(A1)--(M)circle (0.25pt)%node[right=-2pt]{$M$}
+	(D)circle (0.25pt)node[left=-2pt]{$D$};
+	
+	\draw[thin,dash pattern=on 2pt off 2pt](A1)--(A)
+	(D1)--(D)
+	(C1)--(D)
+	(D)--(C)
+	(A)--(D)
+	(M)--(D)
+	(A1)--(D)
+	(D1)--(M);
+\end{tikzpicture}
+\end{minipage}
+
+\newpage

@@ -1,0 +1,146 @@
+\section{训练模型的简易流程}
+
+% ----------------------------------------------------------------------------------------- %
+\subsection{基本流程}
+通常深度学习领域，我们将
+
+
+\begin{description}
+	\item[1.] 数据准备
+	\begin{description}
+		\item[1.1] 数据收集
+		\begin{itemize}
+			\item 下载、抓取或者合成数据
+			\item 公开数据集（ImageNet、COCO、MNIST 等）
+			\item 定义数据集（遥感图像、医学图像、草图数据等）
+			\item 数据增强（旋转、翻转、模糊等）
+		\end{itemize}
+		\item[1.2] 数据预处理
+		\begin{itemize}
+			\item 归一化
+			\item 格式转换
+			\item 数据储存形式等
+		\end{itemize}
+		\item[1.3] 数据加载
+		\begin{itemize}
+			\item 定义批处理
+		\end{itemize}
+	\end{description}
+	\item[2.] 定义模型
+	\begin{itemize}
+		\item 选择合适的架构
+		\item 决定模型的层数，参数量
+		\item 加载预训练模型
+	\end{itemize}
+	\item[3.] 定义损失函数和优化器
+	\begin{description}
+		\item[3.1] 选择损失函数 
+		\begin{itemize}
+			\item 分类任务：交叉熵，折页损失函数(SVM)
+			\item 回归任务：均方差(MSE)
+			\item 对象检测或者分割：交并比(ioU)
+			\item 策略优化：KL 散度
+			\item 词嵌入：噪音对比估计(NCE)
+			\item 词向量：余弦相似度
+			\item 等等
+		\end{itemize}
+		\item[3.2] 选择优化器
+		\begin{itemize}
+			\item SGD
+			\item AdamW
+		\end{itemize}
+		\item[3.3] 学习率的调度
+		\begin{itemize}
+			\item StepLR
+			\item Cosine Annealing
+		\end{itemize}
+	\end{description}
+	\item[4.] 训练模型
+	在每个 epoch 中
+	\begin{description}
+		\item 训练阶段
+		\begin{itemize}
+			\item 前向传播
+			\item 计算损失
+			\item 反向传播
+		\end{itemize}
+		\item 验证阶段
+		\begin{itemize}
+			\item 计算在验证集上的损失
+			\item 评估指标
+		\end{itemize}
+	\end{description}
+	\item[5.] 评估和测试
+	\begin{itemize}
+		\item 计算指标
+		\item 绘制loss曲线
+		\item 生成可视化结果
+	\end{itemize}
+	\item[6.] 模型保存和记录
+	\begin{description}
+		\item[6.1] 保存最佳模型
+		\item[6.2] 记录训练信息
+		\begin{itemize}
+			\item 日志信息
+			\item wandb
+			\item 记录训练时长
+			\item 记录模型的显存峰值
+			\item 等等
+		\end{itemize}
+	\end{description}
+	\item[7.] 部署和推理
+	\begin{itemize}
+		\item 导出 ONNX/TensorRT python
+		\item 加载模型进行推理
+	\end{itemize}
+	\item[8.] 超参数调优
+\end{description}
+
+% ----------------------------------------------------------------------------------------- %
+\subsection{基本代码模块详解}
+
+% 1.
+\subsubsection{A.数据准备}
+在数据处理、编程开发或机器学习等领域，数据加载（Data Loading） 是指将数据从存储位置（如文件、数据库、网络接口等）读取到程序的内存中，使其成为可被程序直接访问和处理的格式的过程。它是数据处理流程中的基础环节，为后续的清洗、分析、建模等操作提供数据支持。通常采用：
+\begin{itemize}
+	\item RGB数据、OR BGR数据
+	\item JPEG编码后的数据
+	\item torchvision.datasets中shuju 
+	\item torch.utils.data下的Dataset, Dataloader自定义的数据集
+\end{itemize}
+
+在机器学习（尤其是计算机视觉、自然语言处理等领域）中，数据增强（Data Augmentation） 是一种通过对原始训练数据进行合理的、有策略的变换或扩展，生成新的 “虚拟样本”，从而扩大训练数据集规模、丰富数据多样性的技术。
+其核心目标是：让模型在训练时接触到更多样化的输入，增强模型对数据中各种变化（如噪声、变形、视角差异等）的鲁棒性，减少过拟合（即模型过度依赖训练数据的细节，在新数据上表现不佳）。
+通常采用：
+
+\begin{lstlisting}[language=python,caption={数据增强格式},label=code:Data Augmentation]
+	import 
+	
+	# 将需要的变换均置于Compose盒子里面逐个处理
+	train_transforms = transforms.Compose([
+		transforms.RandonResizeCrop((227,227))
+		transforms.ToTensor(),
+		# 等等
+	])
+\end{lstlisting}
+% 2.
+\subsubsection{B.定义模型}
+
+% 3.
+\subsubsection{C.定义损失函数和优化器}
+
+% 4.
+\subsubsection{D.训练模型}
+
+% 5. 
+\subsubsection{E.训练和测试}
+
+
+
+
+
+% ----------------------------------------------------------------------------------------- %
+\subsection{定制代码模块详解}
+
+
+\newpage

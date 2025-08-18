@@ -1,0 +1,196 @@
+\documentclass[10pt,openany]{book}
+\usepackage{ctex} 
+\usepackage{geometry,graphicx,xcolor,color}
+\geometry{
+	a4paper,
+	top=25.4mm, bottom=25.4mm,
+	left=20mm, right=20mm,
+	headheight=2.17cm,
+	headsep=4mm,
+	footskip=12mm
+}
+
+\usepackage{amssymb,amsmath,mathrsfs}                    % 数学字体
+\usepackage{mathpazo}% 采用 Palatino 风格字体
+\usepackage[nofontspec]{newpxtext}
+
+\definecolor{winered}{rgb}{0.5,0,0}
+\definecolor{structurecolor}{RGB}{122,122,142}
+\definecolor{main}{HTML}{3D445F}
+\definecolor{second}{HTML}{627581}
+\definecolor{third}{HTML}{9D8798}
+
+% 定义引用的颜色
+\usepackage{hyperref}
+\hypersetup{colorlinks = true, linktoc=all, linkcolor=black, urlcolor=winered}
+
+% ------------------------------------------------------------%
+% 定义定理环境
+\usepackage{amsthm}
+\newtheoremstyle{defstyle}{3pt}{3pt}{\kaishu}{-3pt}{\bfseries\color{main}}{}{0.5em}{\indent 【\thmname{#1} \thmnumber{#2}】 \thmnote{(#3)}}
+\newtheoremstyle{thmstyle}{3pt}{3pt}{\kaishu}{-3pt}{\bfseries\color{second}}{}{0.5em}{\indent【\thmname{#1} \thmnumber{#2}】 \thmnote{(#3)}}
+\newtheoremstyle{prostyle}{3pt}{3pt}{\kaishu}{-3pt}{\bfseries\color{third}}{}{0.5em}{\indent【\thmname{#1} \thmnumber{#2}】 \thmnote{(#3)}}
+
+\theoremstyle{thmstyle} %theorem style
+\newtheorem{theorem}{定理}[chapter]
+\theoremstyle{defstyle} % definition style
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\theoremstyle{prostyle} % proposition style
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{example}[theorem]{例题}
+\newtheorem{remark}[theorem]{注}
+
+\renewenvironment{proof}[1][证明]{\par\underline{\textbf{#1.}} \;\fangsong}{\qed\par}
+\newenvironment{solution}{\par\underline{\textbf{解.}} \;\kaishu}{\qed\par}
+\newcommand{\intro}[1]{\rightline{\parbox[t]{5cm}{\footnotesize \fangsong\quad\quad #1 }}}
+% ------------------------------------------------------------%
+% ------------------------------------------------------------%
+% 设置章节形式
+
+\usepackage{titlesec, titletoc}
+\linespread{1.2} 				
+\usepackage{fancyhdr}
+\fancyhf{}
+\renewcommand{\headrule}{\color{structurecolor}\hrule width\textwidth}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt}
+\fancypagestyle{plain}{
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyhf{}
+	\fancyfoot[c]{\color{structurecolor}\small\thepage}
+	\renewcommand{\headrule}{}
+	}
+
+\fancyhead[c]{\color{structurecolor}\kaishu\rightmark}
+\fancyfoot[c]{\color{structurecolor}\small\thepage}
+
+\titleformat{\chapter}[display]{\Large}
+{\color{structurecolor}\filleft
+	\parbox{1cm}{\vbox to 1.5cm{\vfill\hbox to 4cm{\hfill\Huge \bfseries \color{structurecolor}{Chapter} \thechapter \hfill}}}}
+{1ex}
+{\color{structurecolor} \titlerule[2pt]\large\bfseries \filright \vspace*{1em}}
+[\vspace*{1em} {\titlerule[2pt]}]
+
+\titleformat{\section}[frame]{\normalfont\color{structurecolor}}{\footnotesize \enspace \large \textcolor{structurecolor}{\S \,\thesection}\enspace}{6pt}{\Large\filcenter \bf \kaishu }
+
+
+\titleformat{\subsection}[hang]{\bfseries}{\large\bfseries\color{structurecolor}\thesubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
+
+\titleformat{\subsubsection}[hang]{\bfseries}{\large\bfseries\color{structurecolor}\thesubsubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
+
+% ------------------------------------------------------------%
+% 设置封面
+\usepackage{titling}
+\renewcommand*{\maketitle}{
+	\begin{titlepage}
+		\newgeometry{margin = 0in}
+		\parindent=0pt
+		\includegraphics[scale=0.44]{Pictures/Cover_images/7_2.jpg}
+		\vfill
+		\begin{center}
+			\parbox{0.618\textwidth}{
+				\hfill {\bfseries \Huge \thetitle} \\[0.6pt]  
+				\rule{0.618\textwidth}{4pt} \\ 
+			}
+		\end{center}
+		\vfill
+		\begin{center}
+			\parbox{0.618\textwidth}{
+				\hfill\Large
+				\kaishu 
+				\begin{tabular}{r|}
+					作者：\theauthor \\ 
+					时间：\thedate \\
+				\end{tabular}
+			}
+		\end{center}
+		\vfill
+		\begin{center}
+			\parbox[t]{0.7\textwidth}{\centering \kaishu }
+		\end{center}
+		\vfill
+	\end{titlepage}
+	\restoregeometry
+	\thispagestyle{empty}
+}
+% ------------------------------------------------------------%
+
+\title{学习笔记}
+% \author{\href{https://www.zhihu.com/people/moment-jue-wang-30}{北斗逍遥-张嘉}}
+\author{北斗逍遥-张嘉}
+\date{\today}
+
+% ------------------------------------------------------------%
+
+% 参考文献配置
+\bibliographystyle{plain}
+
+% ------------------------------------------------------------%
+% 代码块的配置
+\usepackage{listings}  % 代码块宏包
+\usepackage{xcolor}    % 颜色支持
+
+% 配置 listings
+\lstset{
+	language=Python,       % 默认语言（可在环境里覆盖）
+	frame=shadowbox,       % 边框样式：shadowbox（阴影框）/ single（实线框）/ double（双线框）
+	rulesepcolor=\color{gray},  % 边框颜色
+	backgroundcolor=\color{gray!5},  % 代码块背景色（浅灰色）
+	tabsize=4,	% 缩进长度
+	numbers=left,          % 显示行号
+	numberstyle=\tiny\color{gray},  % 行号样式
+	keywordstyle=\color{blue},      % 关键字颜色
+	commentstyle=\color{green!60!black},  % 注释颜色
+	stringstyle=\color{red},        % 字符串颜色
+	basicstyle=\ttfamily\small,    % 代码字体（等宽+小字号）
+	breaklines=true,                % 自动换行
+	captionpos=b,                  % 标题位置（b=底部，t=顶部）
+}
+
+% ------------------------------------------------------------%
+% 常用配置
+\usepackage{comment}
+\usepackage{tikz}
+\usetikzlibrary{3d,calc,intersections}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{tikz-3dplot} %%三维图形绘制需要的宏包
+\usetikzlibrary{patterns}%%填充使用的宏包
+
+
+
+
+% ------------------------------------------------------------%
+\begin{document}
+\frontmatter
+
+\maketitle
+
+\tableofcontents
+
+\mainmatter
+
+% ------------------------------------------------------------%
+% 置放章节
+\input{Chapters/chapter1_Mathtool}
+\newpage
+\input{Chapters/chapter2_Theoretical_Analysis}
+\newpage
+\input{Chapters/chapter3_AIcode}
+\newpage
+\input{Chapters/chapter4_AI_Knowledge_Compilation}
+\newpage
+\input{Chapters/chapter5_Article_Summary}
+\newpage
+\input{Chapters/chapter6_Technical_Summary}
+\newpage
+\input{Chapters/chapter7_Project_Exercise}
+\newpage
+
+% ------------------------------------------------------------%
+% 显示参考文献
+\bibliography{reference.bib}
+
+\end{document}
