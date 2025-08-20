@@ -114,12 +114,26 @@
 通常采用：
 
 \begin{lstlisting}[language=python,caption={数据增强格式},label=code:Data Augmentation]
-	import 
+	from torchvision import transforms 
 	
-	# 将需要的变换均置于Compose盒子里面逐个处理
-	train_transforms = transforms.Compose([
-		transforms.RandonResizeCrop((227,227))
+	# 定义数据增强
+	train_transform = transforms.Compose([
+		# 随机剪切
+		transforms.RandomResizedCrop((28, 28)),
+		# 随机水平翻转
+		transforms.RandomHorizontalFlip(),
+		# 随机垂直翻转
+		transforms.RandomVerticalFlip(),
+		# 随机旋转
+		transforms.RandomRotation(90),
+		# 随机转换为灰度图
+		transforms.RandomGrayscale(p=0.1),
+		# 颜色信息增强
+		transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.3),
+		# 转换为Tensor
 		transforms.ToTensor(),
+		# 归一化
+		# transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
 		# 等等
 	])
 \end{lstlisting}
