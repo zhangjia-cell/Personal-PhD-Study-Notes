@@ -35,41 +35,62 @@
 \contentsline {paragraph}{文件操作}{8}{lstnumber.3.11.6}%
 \contentsline {subsubsection}{shell-参数自动化调整}{8}{lstnumber.3.12.6}%
 \contentsline {paragraph}{自动化调参python-part}{8}{lstnumber.3.12.6}%
-\contentsline {paragraph}{自动化调参shell-part}{9}{lstnumber.3.13.26}%
+\contentsline {paragraph}{自动化调参shell-part}{9}{lstnumber.3.13.35}%
+\contentsline {paragraph}{运行脚本}{10}{lstnumber.3.14.21}%
 \contentsline {subsection}{\numberline {3.1.3}进度条设置}{10}{subsection.3.1.3}%
 \contentsline {paragraph}{基本用法}{10}{subsection.3.1.3}%
 \contentsline {subsection}{\numberline {3.1.4}查询服务器显卡属性设置}{11}{subsection.3.1.4}%
 \contentsline {paragraph}{训练显存消耗记录}{11}{subsection.3.1.4}%
-\contentsline {paragraph}{训练时长消耗记录}{11}{lstnumber.3.16.35}%
+\contentsline {paragraph}{训练时长消耗记录}{12}{lstnumber.3.17.35}%
 \contentsline {subsection}{\numberline {3.1.5}wandb学习}{12}{subsection.3.1.5}%
 \contentsline {subsection}{\numberline {3.1.6}Github 项目管理}{14}{subsection.3.1.6}%
 \contentsline {subsection}{\numberline {3.1.7}Tikz的使用查询}{14}{subsection.3.1.7}%
 \contentsline {paragraph}{基础环境}{14}{subsection.3.1.7}%
-\contentsline {paragraph}{图形绘制}{14}{lstnumber.3.19.4}%
-\contentsline {paragraph}{曲线绘制}{14}{lstnumber.3.19.4}%
+\contentsline {paragraph}{图形绘制}{14}{lstnumber.3.20.4}%
+\contentsline {paragraph}{曲线绘制}{14}{lstnumber.3.20.4}%
 \contentsline {section}{\numberline {3.2}训练模型的简易流程}{16}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}基本流程}{16}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}基本代码模块详解}{17}{subsection.3.2.2}%
 \contentsline {subsubsection}{A.数据准备}{17}{subsection.3.2.2}%
-\contentsline {subsubsection}{B.定义模型}{18}{lstnumber.3.20.22}%
-\contentsline {subsubsection}{C.定义损失函数和优化器}{18}{lstnumber.3.20.22}%
-\contentsline {subsubsection}{D.训练模型}{18}{lstnumber.3.20.22}%
-\contentsline {subsubsection}{E.训练和测试}{18}{lstnumber.3.20.22}%
-\contentsline {subsection}{\numberline {3.2.3}定制代码模块详解}{18}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}研究领域和代码编写示例}{19}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}图像识别(Computer Vision)}{19}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}自然语言处理(Natural Language Processing)}{19}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}生成时学习(Generative Learning)}{19}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}多模态(Multimodal)}{19}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}脉冲神经网络相关(SNN)}{19}{subsection.3.3.5}%
-\contentsline {chapter}{\numberline {4}第四章：AI 知识整理}{20}{chapter.4}%
-\contentsline {chapter}{\numberline {5}第五章：文章汇总整理}{21}{chapter.5}%
-\contentsline {section}{\numberline {5.1}黑盒-零阶优化问题}{21}{section.5.1}%
-\contentsline {section}{\numberline {5.2}大模型微调相关}{21}{section.5.2}%
-\contentsline {section}{\numberline {5.3}SNN相关[校准]}{21}{section.5.3}%
-\contentsline {section}{\numberline {5.4}SNN相关[量化]}{21}{section.5.4}%
-\contentsline {section}{\numberline {5.5}SNN相关[马尔可夫]}{21}{section.5.5}%
-\contentsline {section}{\numberline {5.6}SNN相关[编码]}{21}{section.5.6}%
-\contentsline {chapter}{\numberline {6}第六章：技术汇总整理}{22}{chapter.6}%
-\contentsline {chapter}{\numberline {7}第七章：项目练习}{23}{chapter.7}%
+\contentsline {subsubsection}{B.定义模型}{18}{lstnumber.3.21.22}%
+\contentsline {subsubsection}{C.定义损失函数和优化器}{21}{lstnumber.-1.71}%
+\contentsline {subsubsection}{D.训练和测试模型}{21}{lstnumber.-1.71}%
+\contentsline {subsubsection}{E.训练和测试}{21}{lstnumber.-1.71}%
+\contentsline {subsection}{\numberline {3.2.3}定制代码模块详解}{21}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}基础环境配置}{21}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}研究领域和代码编写示例}{23}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}图像识别(Computer Vision)}{23}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}自然语言处理(Natural Language Processing)}{23}{subsection.3.3.2}%
+\contentsline {subsubsection}{情感分析}{23}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}生成式学习(Generative Learning)}{23}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}多模态(Multimodal)}{23}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}脉冲神经网络相关(SNN)}{23}{subsection.3.3.5}%
+\contentsline {chapter}{\numberline {4}第四章：AI 知识整理}{24}{chapter.4}%
+\contentsline {chapter}{\numberline {5}第五章：文章汇总整理}{25}{chapter.5}%
+\contentsline {section}{\numberline {5.1}黑盒-零阶优化问题}{25}{section.5.1}%
+\contentsline {section}{\numberline {5.2}大模型微调相关}{25}{section.5.2}%
+\contentsline {section}{\numberline {5.3}SNN相关[校准]}{25}{section.5.3}%
+\contentsline {section}{\numberline {5.4}SNN相关[量化]}{25}{section.5.4}%
+\contentsline {section}{\numberline {5.5}SNN相关[马尔可夫]}{25}{section.5.5}%
+\contentsline {section}{\numberline {5.6}SNN相关[编码]}{25}{section.5.6}%
+\contentsline {chapter}{\numberline {6}第六章：技术汇总整理}{26}{chapter.6}%
+\contentsline {chapter}{\numberline {7}第七章：项目练习}{27}{chapter.7}%
+\contentsline {chapter}{\numberline {A}常见的的数据集汇总}{29}{appendix.A}%
+\contentsline {section}{\numberline {A.1}图像数据}{29}{section.A.1}%
+\contentsline {subsection}{\numberline {A.1.1}常见的CycleGAN数据：}{29}{subsection.A.1.1}%
+\contentsline {subsubsection}{horse2zebra}{29}{subsection.A.1.1}%
+\contentsline {subsubsection}{apple2orange}{29}{subsection.A.1.1}%
+\contentsline {subsubsection}{summer2winter\_yosemite}{29}{subsection.A.1.1}%
+\contentsline {subsubsection}{monet2photo}{29}{subsection.A.1.1}%
+\contentsline {subsubsection}{cezanne2photo}{29}{subsection.A.1.1}%
+\contentsline {subsubsection}{ukiyoe2photo}{30}{subsection.A.1.1}%
+\contentsline {subsubsection}{vangogh2photo}{30}{subsection.A.1.1}%
+\contentsline {subsubsection}{maps}{30}{subsection.A.1.1}%
+\contentsline {subsubsection}{facades}{30}{subsection.A.1.1}%
+\contentsline {subsubsection}{iphone2dslr\_flower}{30}{subsection.A.1.1}%
+\contentsline {subsubsection}{ae\_photos}{30}{subsection.A.1.1}%
+\contentsline {section}{\numberline {A.2}文本数据}{30}{section.A.2}%
+\contentsline {section}{\numberline {A.3}脉冲数据}{30}{section.A.3}%
+\contentsline {section}{\numberline {A.4}音频数据}{30}{section.A.4}%
+\contentsline {section}{\numberline {A.5}视频数据}{30}{section.A.5}%
 \contentsfinish 

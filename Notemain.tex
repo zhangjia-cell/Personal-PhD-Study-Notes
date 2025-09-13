@@ -158,7 +158,9 @@
 \usepackage{subcaption}
 \usepackage{tikz-3dplot} %%三维图形绘制需要的宏包
 \usetikzlibrary{patterns}%%填充使用的宏包
-
+\usepackage{multirow} % 用于合并单元格等操作，若不需要可删除
+\usepackage{booktabs} % 用于绘制更美观的横线
+\usepackage{tabularx}
 
 
 
@@ -191,5 +193,13 @@
 % ------------------------------------------------------------%
 % 显示参考文献
 \bibliography{reference.bib}
+\newpage
+% ------------------------------------------------------------%
+% 附录
+\appendix
+
+% ------------------------------------------------------------%
+% 插入附录章节
+\input{Appendix/A_Datasets}
 
 \end{document}
