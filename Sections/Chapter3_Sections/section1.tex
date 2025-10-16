@@ -192,7 +192,8 @@
 \subsubsection{shell-基础语法}
 一些常见的语法可供查阅
 
-\paragraph{声明变量}
+% \paragraph{声明变量}
+\textbf{声明变量}
 \begin{lstlisting}[language=sh,caption={声明变量},label=code:shell_base1]
 	# 声明一个变量
 	name="John"
@@ -203,7 +204,8 @@
 \end{lstlisting}
 
 
-\paragraph{if-else}
+% \paragraph{if-else}
+\textbf{if-else}
 \begin{lstlisting}[language=sh,caption={if-else语法},label=code:shell_base2]
 	age=20
 	# -eq:等于,--ne:不等于,-gt:大于,-lt:小于,-ge:大于等于,-le:小于等于
@@ -216,7 +218,8 @@
 	fi	
 \end{lstlisting}
 
-\paragraph{case嵌套}
+% \paragraph{case嵌套}
+\textbf{case嵌套}
 \begin{lstlisting}[language=sh,caption={case嵌套循环示例代码},label=code:shell_base3]
 	case $TASK in
 		CB)
@@ -242,7 +245,8 @@
 	esac
 \end{lstlisting}
 
-\paragraph{for循环}
+% \paragraph{for循环}
+\textbf{for循环}
 \begin{lstlisting}[language=sh,caption={for-循环语法},label=code:shell_base4]
 	# 输出 1 到 5 的数字
 	for i in {1..5}; do
@@ -251,7 +255,8 @@
 \end{lstlisting}
 
 
-\paragraph{while循环}
+% \paragraph{while循环}
+\textbf{while循环}
 \begin{lstlisting}[language=sh,caption={while-循环语法},label=code:shell_base5]
 	# 输出 1 到 5 的数字
 	i=1
@@ -262,7 +267,8 @@
 \end{lstlisting}
 
 
-\paragraph{until循环}
+% \paragraph{until循环}
+\textbf{until循环}
 \begin{lstlisting}[language=sh,caption={until-循环语法},label=code:shell_base6]
 	# 输出 1 到 5 的数字
 	i=1
@@ -273,7 +279,8 @@
 \end{lstlisting}
 
 
-\paragraph{函数语法}
+% \paragraph{函数语法}
+\textbf{函数语法}
 \begin{lstlisting}[language=sh,caption={函数},label=code:shell_base7]
 	# 定义函数
 	greet() {
@@ -284,7 +291,8 @@
 \end{lstlisting}
 
 
-\paragraph{文件操作}
+% \paragraph{文件操作}
+\textbf{文件操作}
 \begin{lstlisting}[language=sh,caption={文件操作},label=code:shell_base8]
 	touch myfile.txt  # 创建一个空文件
 	echo "This is a test." > myfile.txt  # 覆盖写入
@@ -296,7 +304,8 @@
 
 \subsubsection{shell-参数自动化调整}
 
-\paragraph{自动化调参python-part}
+% \paragraph{自动化调参python-part}
+\textbf{自动化调参python-part}
 \begin{lstlisting}[language=python,caption={调参},label=code:shell_tuning_py]
 	import argparse
 	from transformers import HfArgumentParser
@@ -336,7 +345,8 @@
 \end{lstlisting}
 
 
-\paragraph{自动化调参shell-part}
+% \paragraph{自动化调参shell-part}
+\textbf{自动化调参shell-part}
 \begin{lstlisting}[language=sh,caption={调参},label=code:shell_tuning_sh]
 	#!/bin/bash
 	
@@ -361,7 +371,8 @@
 	done
 \end{lstlisting}
 
-\paragraph{运行脚本}
+% \paragraph{运行脚本}
+\textbf{运行脚本}
 \begin{lstlisting}[language=python,caption={运行代码},label=code:run]
 	# Windows版本(示例)
 	python -u "f:\C_Code_AI_Program\C_Generative\GAN1_Image_Style_Transfer\trainrun.py" --gpu_ids 0 --task_name apple2orange --lr 0.0002 --batch_size 1 --epochs 1000 --size 256 --decay_epoch 60
@@ -374,7 +385,8 @@
 % --------------------------------------------------------------------------------------------- %
 \subsection{进度条设置}
 进度条需要采用tqdm包，基本使用方法如下：
-\paragraph{基本用法}
+% \paragraph{基本用法}
+\textbf{基本用法}
 \begin{lstlisting}[language=python,caption={示例},label=code:tqdb]
 	from tqdm import tqdm
 	import time
@@ -436,7 +448,8 @@
 % --------------------------------------------------------------------------------------------- %
 \subsection{查询服务器显卡属性设置}
 
-\paragraph{训练显存消耗记录}
+% \paragraph{训练显存消耗记录}
+\textbf{训练显存消耗记录}
 \begin{lstlisting}[language=python,caption={查询显存},label=code:train_memory]
 	import torch
 	
@@ -475,7 +488,8 @@
 			track_gpu_memory("批次结束后")
 \end{lstlisting}
 
-\paragraph{训练时长消耗记录}
+% \paragraph{训练时长消耗记录}
+\textbf{训练时长消耗记录}
 \begin{lstlisting}[language=python,caption={训练时长记录},label=code:train_time]
 	import time
 	from datetime import timedelta
@@ -593,7 +607,8 @@
 % --------------------------------------------------------------------------------------------- %
 % --------------------------------------------------------------------------------------------- %
 \subsection{Tikz的使用查询}
-\paragraph{基础环境}
+% \paragraph{基础环境}
+\textbf{基础环境}
 \begin{lstlisting}[language=tex,caption={tikz基础},label=code:tikz1]
 	\usepackage{tikz} 
 	\begin{tikzpicture}

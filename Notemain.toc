@@ -26,27 +26,12 @@
 \contentsline {subsubsection}{将日志信息整理到表格}{6}{lstnumber.3.3.27}%
 \contentsline {subsection}{\numberline {3.1.2}终端自动化调参}{6}{subsection.3.1.2}%
 \contentsline {subsubsection}{shell-基础语法}{6}{subsection.3.1.2}%
-\contentsline {paragraph}{声明变量}{7}{subsection.3.1.2}%
-\contentsline {paragraph}{if-else}{7}{lstnumber.3.5.6}%
-\contentsline {paragraph}{case嵌套}{7}{lstnumber.3.6.9}%
-\contentsline {paragraph}{for循环}{7}{lstnumber.3.7.22}%
-\contentsline {paragraph}{while循环}{8}{lstnumber.3.8.4}%
-\contentsline {paragraph}{until循环}{8}{lstnumber.3.9.6}%
-\contentsline {paragraph}{函数语法}{8}{lstnumber.3.10.6}%
-\contentsline {paragraph}{文件操作}{8}{lstnumber.3.11.6}%
 \contentsline {subsubsection}{shell-参数自动化调整}{8}{lstnumber.3.12.6}%
-\contentsline {paragraph}{自动化调参python-part}{8}{lstnumber.3.12.6}%
-\contentsline {paragraph}{自动化调参shell-part}{9}{lstnumber.3.13.35}%
-\contentsline {paragraph}{运行脚本}{10}{lstnumber.3.14.21}%
 \contentsline {subsection}{\numberline {3.1.3}进度条设置}{10}{subsection.3.1.3}%
-\contentsline {paragraph}{基本用法}{10}{subsection.3.1.3}%
 \contentsline {subsection}{\numberline {3.1.4}查询服务器显卡属性设置}{11}{subsection.3.1.4}%
-\contentsline {paragraph}{训练显存消耗记录}{11}{subsection.3.1.4}%
-\contentsline {paragraph}{训练时长消耗记录}{12}{lstnumber.3.17.35}%
 \contentsline {subsection}{\numberline {3.1.5}wandb学习}{12}{subsection.3.1.5}%
 \contentsline {subsection}{\numberline {3.1.6}Github 项目管理}{14}{subsection.3.1.6}%
 \contentsline {subsection}{\numberline {3.1.7}Tikz的使用查询}{14}{subsection.3.1.7}%
-\contentsline {paragraph}{基础环境}{14}{subsection.3.1.7}%
 \contentsline {paragraph}{图形绘制}{14}{lstnumber.3.20.4}%
 \contentsline {paragraph}{曲线绘制}{14}{lstnumber.3.20.4}%
 \contentsline {section}{\numberline {3.2}训练模型的简易流程}{16}{section.3.2}%
