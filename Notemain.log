@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.7.2)  16 OCT 2025 15:38
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.7.2)  23 OCT 2025 01:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1192,8 +1192,8 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-File: Pictures/Cover_images/7_2.jpg Graphic file (type bmp)
-<Pictures/Cover_images/7_2.jpg>
+File: Images/Cover_images/7_2.jpg Graphic file (type bmp)
+<Images/Cover_images/7_2.jpg>
 
 Overfull \hbox (5.34625pt too wide) in paragraph at lines 171--171
 [][] 
@@ -1460,17 +1460,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [20]
 
 [21]
-Overfull \hbox (42.98901pt too wide) in paragraph at lines 355--356
-[]\TU/TeXGyrePagellaX(0)/m/n/10 wget https://repo.anaconda.com/miniconda/Minico
-nda3-latest-Linux-x86_64.sh -O  /miniconda3/miniconda.sh 
- []
-
-
 
 [22]) (./Sections/Chapter3_Sections/section3.tex
-File: Pictures/Chapter3_images/Sentiment_Analysis_Process.pdf Graphic file (typ
-e pdf)
-<use Pictures/Chapter3_images/Sentiment_Analysis_Process.pdf>
+File: Images/Chapter3_images/Sentiment_Analysis_Process.pdf Graphic file (type 
+pdf)
+<use Images/Chapter3_images/Sentiment_Analysis_Process.pdf>
 ))
 
 [23] (./Chapters/chapter4_AI_Knowledge_Compilation.tex
@@ -1492,23 +1486,24 @@ Chapter 5.
 
 ] (./Chapters/chapter6_Technical_Summary.tex
 Chapter 6.
-)
+(./Sections/Chapter6_Sections/section1.tex
 
 [26
 
-] (./Chapters/chapter7_Project_Exercise.tex
+]
+File: Images/Chapter6_images/DARTS.pdf Graphic file (type pdf)
+<use Images/Chapter6_images/DARTS.pdf>
+))
+
+[27] (./Chapters/chapter7_Project_Exercise.tex
 Chapter 7.
 )
 
-[27
-
-] (./Notemain.bbl
-
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
-
-)
-
 [28
+
+] (./Notemain.bbl)
+
+[29
 
 ] (./Appendix/A_Datasets.tex
 附录 A.
@@ -1526,7 +1521,7 @@ Overfull \hbox (7.25887pt too wide) in paragraph at lines 28--30
 
 
 
-[29
+[30
 
 ]
 Overfull \hbox (2.00887pt too wide) in paragraph at lines 85--87
@@ -1537,7 +1532,7 @@ Overfull \hbox (2.00887pt too wide) in paragraph at lines 85--87
 
 )
 
-[30] (./Notemain.aux)
+[31] (./Notemain.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/08/05>
@@ -1547,15 +1542,15 @@ L3 programming layer <2022/08/05>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `Notemain.out' has not changed.
-(rerunfilecheck)             Checksum: ADADBABBECFBABD74D4FC8D9CE6BCCD6;6566.
+(rerunfilecheck)             Checksum: 434B85F500AEB4117FEB57DBCC77D1A2;6779.
  ) 
 Here is how much of TeX's memory you used:
- 34708 strings out of 473832
- 722571 string characters out of 5733159
- 1623319 words of memory out of 5000000
- 57047 multiletter control sequences out of 15000+600000
- 574470 words of font info for 128 fonts, out of 8000000 for 9000
+ 34794 strings out of 473832
+ 722934 string characters out of 5733159
+ 1623396 words of memory out of 5000000
+ 57127 multiletter control sequences out of 15000+600000
+ 574478 words of font info for 129 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  93i,12n,131p,545b,2118s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Notemain.pdf (34 pages).
+Output written on Notemain.pdf (35 pages).

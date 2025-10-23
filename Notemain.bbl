@@ -1,3 +1,8 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{liu2018darts}
+Hanxiao Liu, Karen Simonyan, and Yiming Yang.
+\newblock Darts: Differentiable architecture search.
+\newblock {\em arXiv preprint arXiv:1806.09055}, 2018.
 
 \end{thebibliography}
