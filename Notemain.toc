@@ -68,23 +68,25 @@
 \contentsline {subsubsection}{具体方法：}{26}{subsection.6.1.1}%
 \contentsline {paragraph}{1.Search Space:}{27}{subsection.6.1.1}%
 \contentsline {paragraph}{2.Continuous Relaxation and Optimization:}{27}{equation.6.1}%
-\contentsline {chapter}{\numberline {7}第七章：项目练习}{28}{chapter.7}%
-\contentsline {chapter}{\numberline {A}常见的的数据集汇总}{30}{appendix.A}%
-\contentsline {section}{\numberline {A.1}图像数据}{30}{section.A.1}%
-\contentsline {subsection}{\numberline {A.1.1}常见的CycleGAN数据：}{30}{subsection.A.1.1}%
-\contentsline {subsubsection}{horse2zebra}{30}{subsection.A.1.1}%
-\contentsline {subsubsection}{apple2orange}{30}{subsection.A.1.1}%
-\contentsline {subsubsection}{summer2winter\_yosemite}{30}{subsection.A.1.1}%
-\contentsline {subsubsection}{monet2photo}{30}{subsection.A.1.1}%
-\contentsline {subsubsection}{cezanne2photo}{30}{subsection.A.1.1}%
-\contentsline {subsubsection}{ukiyoe2photo}{31}{subsection.A.1.1}%
-\contentsline {subsubsection}{vangogh2photo}{31}{subsection.A.1.1}%
-\contentsline {subsubsection}{maps}{31}{subsection.A.1.1}%
-\contentsline {subsubsection}{facades}{31}{subsection.A.1.1}%
-\contentsline {subsubsection}{iphone2dslr\_flower}{31}{subsection.A.1.1}%
-\contentsline {subsubsection}{ae\_photos}{31}{subsection.A.1.1}%
-\contentsline {section}{\numberline {A.2}文本数据}{31}{section.A.2}%
-\contentsline {section}{\numberline {A.3}脉冲数据}{31}{section.A.3}%
-\contentsline {section}{\numberline {A.4}音频数据}{31}{section.A.4}%
-\contentsline {section}{\numberline {A.5}视频数据}{31}{section.A.5}%
+\contentsline {paragraph}{3 Approximate Architecture Gradient}{27}{equation.6.4}%
+\contentsline {subsubsection}{总结}{28}{equation.6.7}%
+\contentsline {chapter}{\numberline {7}第七章：项目练习}{29}{chapter.7}%
+\contentsline {chapter}{\numberline {A}常见的的数据集汇总}{31}{appendix.A}%
+\contentsline {section}{\numberline {A.1}图像数据}{31}{section.A.1}%
+\contentsline {subsection}{\numberline {A.1.1}常见的CycleGAN数据：}{31}{subsection.A.1.1}%
+\contentsline {subsubsection}{horse2zebra}{31}{subsection.A.1.1}%
+\contentsline {subsubsection}{apple2orange}{31}{subsection.A.1.1}%
+\contentsline {subsubsection}{summer2winter\_yosemite}{31}{subsection.A.1.1}%
+\contentsline {subsubsection}{monet2photo}{31}{subsection.A.1.1}%
+\contentsline {subsubsection}{cezanne2photo}{31}{subsection.A.1.1}%
+\contentsline {subsubsection}{ukiyoe2photo}{32}{subsection.A.1.1}%
+\contentsline {subsubsection}{vangogh2photo}{32}{subsection.A.1.1}%
+\contentsline {subsubsection}{maps}{32}{subsection.A.1.1}%
+\contentsline {subsubsection}{facades}{32}{subsection.A.1.1}%
+\contentsline {subsubsection}{iphone2dslr\_flower}{32}{subsection.A.1.1}%
+\contentsline {subsubsection}{ae\_photos}{32}{subsection.A.1.1}%
+\contentsline {section}{\numberline {A.2}文本数据}{32}{section.A.2}%
+\contentsline {section}{\numberline {A.3}脉冲数据}{32}{section.A.3}%
+\contentsline {section}{\numberline {A.4}音频数据}{32}{section.A.4}%
+\contentsline {section}{\numberline {A.5}视频数据}{32}{section.A.5}%
 \contentsfinish 

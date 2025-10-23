@@ -54,23 +54,46 @@ $\hat{o}^{(i,j)}$ 替换成 $o^{(i,j)}$ 就可以了。下图是一个示意图�
 	\centering
 	\includegraphics[scale=0.9]{Images/Chapter6_images/DARTS.pdf}
 \end{figure}
-上述内容主要围绕神经网络架构优化展开，涉及以下核心内容：
+我们再记具体某个 architecture 里的可训练的 weights 为 \( w \)（e.g. convolution, maxpooling 里的 weights），那么优化问题就变成了最小化验证集上的 loss \( \mathcal{L}_{val}\left(w^*,\alpha^*\right) \)，当 architecture 固定即 \( \alpha^* \) 固定时，需要得到 \( w^* \) 来最小化训练集上的 loss \( w^* = \arg\min_w \mathcal{L}_{train}\left(w,\alpha^*\right) \)。
 
-1. 架构优化中，将可训练权重设为 \( w \)，优化目标是最小化验证集损失 \( \mathcal{L}_{val}(w^*,\alpha^*) \)。当架构与 \( \alpha^* \) 固定时，需通过 \( w^* = \arg\min_w \mathcal{L}_{train}(w,\alpha^*) \) 确定最优权重 \( w^* \)。
+上述问题，其实就变成了：
+\begin{align}\label{eq6:darts}
+	\min_{\alpha} \quad & \mathcal{L}_{\text{val}}\left(w^*(\alpha), \alpha\right), \\
+	\text{s.t.} \quad & w^*(\alpha) = \arg\min_{w} \mathcal{L}_{\text{train}}(w, \alpha).
+\end{align}
 
-2. 利用参数 \( \alpha = \alpha_o^{(i,j)} \) 进行 softmax 激活，对各类操作（operation）做加权平均，即：
-\[
-\hat{o}^{(i,j)}(x) = \sum_{o \in \mathcal{O}} \frac{\exp\left(\alpha_o^{(i,j)}\right)}{\sum_{o' \in \mathcal{O}} \exp\left(\alpha_{o'}^{(i,j)}\right)} o(x)
-\]
-问题转化为学习参数集 \( \alpha = \{\alpha_o^{(i,j)}\} \)，搜索结束后通过 \( o^{(i,j)} = \arg\max_{o \in \mathcal{O}} \alpha_o^{(i,j)} \) 替换得到最终操作 \( o^{(i,j)} \)。
+这实际上就变成了一个 bilevel optimization 的问题。
 
-3. 该思路属于神经网络架构搜索（NAS）范畴，通过分步优化架构参数 \( \alpha^* \) 和权重参数 \( w^* \)，实现神经网络架构的自动化设计。
+\paragraph{3 Approximate Architecture Gradient}
 
+直接去优化 \eqref{eq6:darts} 式比较困难，所以作者采用了迭代近似优化的方法，这也是这篇论文很厉害的地方：
 
+\begin{equation}
+	\begin{split}
+		\nabla_{\alpha} \mathcal{L}_{\text{val}}\left(w^*(\alpha), \alpha\right) &\approx \nabla_{\alpha} \mathcal{L}_{\text{val}}\left(w - \xi \nabla_w \mathcal{L}_{\text{train}}(w, \alpha), \alpha\right).
+	\end{split}
+\end{equation}
 
+其中 $\xi$ 是学习率，上式其实是一个复合函数求导，进一步展开化简为：
 
+\begin{equation}
+	\nabla_{\alpha} \mathcal{L}_{\text{val}}\left(w', \alpha\right) - \xi \nabla_{\alpha,w}^2 \mathcal{L}_{\text{train}}(w, \alpha) \nabla_w \mathcal{L}_{\text{val}}\left(w', \alpha\right).
+\end{equation}
 
+接着利用泰勒展开进一步化简得到：
 
+\begin{equation}
+	\nabla_{\alpha,w}^2 \mathcal{L}_{\text{train}}(w, \alpha) \nabla_w \mathcal{L}_{\text{val}}\left(w', \alpha\right) \approx \frac{\nabla_{\alpha} \mathcal{L}_{\text{train}}\left(w^+, \alpha\right) - \nabla_{\alpha} \mathcal{L}_{\text{train}}\left(w^-, \alpha\right)}{2\epsilon}.
+\end{equation}
+
+\subsubsection{总结}
+文章的核心思想的简要流程：
+\begin{enumerate}
+	\item 将网络的不同层，不同模块包装成一个cell
+	\item 对每个cell之间进行权重连接
+	\item 训练结合问题的目标函数，优化权重参数
+	\item 得到最合适的结构
+\end{enumerate}
 
 
 

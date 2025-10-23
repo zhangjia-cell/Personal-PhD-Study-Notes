@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.7.2)  23 OCT 2025 01:00
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.7.2)  23 OCT 2025 14:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1493,17 +1493,19 @@ Chapter 6.
 ]
 File: Images/Chapter6_images/DARTS.pdf Graphic file (type pdf)
 <use Images/Chapter6_images/DARTS.pdf>
-))
 
-[27] (./Chapters/chapter7_Project_Exercise.tex
+
+[27]))
+
+[28] (./Chapters/chapter7_Project_Exercise.tex
 Chapter 7.
 )
 
-[28
+[29
 
 ] (./Notemain.bbl)
 
-[29
+[30
 
 ] (./Appendix/A_Datasets.tex
 附录 A.
@@ -1521,7 +1523,7 @@ Overfull \hbox (7.25887pt too wide) in paragraph at lines 28--30
 
 
 
-[30
+[31
 
 ]
 Overfull \hbox (2.00887pt too wide) in paragraph at lines 85--87
@@ -1532,7 +1534,7 @@ Overfull \hbox (2.00887pt too wide) in paragraph at lines 85--87
 
 )
 
-[31] (./Notemain.aux)
+[32] (./Notemain.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/08/05>
@@ -1545,12 +1547,12 @@ Package rerunfilecheck Info: File `Notemain.out' has not changed.
 (rerunfilecheck)             Checksum: 434B85F500AEB4117FEB57DBCC77D1A2;6779.
  ) 
 Here is how much of TeX's memory you used:
- 34794 strings out of 473832
- 722934 string characters out of 5733159
- 1623396 words of memory out of 5000000
- 57127 multiletter control sequences out of 15000+600000
- 574478 words of font info for 129 fonts, out of 8000000 for 9000
+ 34813 strings out of 473832
+ 723877 string characters out of 5733159
+ 1623467 words of memory out of 5000000
+ 57144 multiletter control sequences out of 15000+600000
+ 574494 words of font info for 131 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 93i,12n,131p,545b,2118s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 93i,19n,131p,545b,2118s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Notemain.pdf (35 pages).
+Output written on Notemain.pdf (36 pages).
