@@ -149,6 +149,51 @@
 	captionpos=b,                  % 标题位置（b=底部，t=顶部）
 }
 
+% ============ Markdown 代码环境配置 ============
+
+% 定义 Markdown 语言高亮
+\lstdefinelanguage{Markdown}{
+	sensitive=true,
+	alsoletter={\#-},
+	% 标题
+	morecomment=[l][\color{second}]{\#},
+	% 引用
+	morecomment=[l][\color{second}]{>},
+	% 列表项
+	morecomment=[l][\color{third}]{-},
+	% 粗体 **bold**
+	moredelim=[s][\bfseries]{**}{**},
+	% 斜体 *italic*
+	moredelim=[s][\itshape]{*}{*},
+	% 行内代码 `code`
+	moredelim=[s][\ttfamily]{`}{`},
+	% 多行代码块 ```code```
+	moredelim=[s][\ttfamily]{```}{```}
+}
+
+% 定义 Markdown 风格
+\lstdefinestyle{markdownstyle}{
+	language=Markdown,
+	frame=shadowbox,
+	rulesepcolor=\color{gray},
+	backgroundcolor=\color{gray!5},
+	tabsize=4,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	basicstyle=\ttfamily\small,
+	breaklines=true
+}
+
+% 自定义 Markdown 代码环境：
+% 使用方式：
+% \begin{markdowncode}[caption={示例},label={lst:md-example}]
+	% # 标题
+	% 一些 *斜体* 和 **粗体**，以及 `inline code`
+	% \end{markdowncode}
+\lstnewenvironment{markdowncode}[1][]{
+	\lstset{style=markdownstyle,#1}
+}{}
+
 % ------------------------------------------------------------%
 % 常用配置
 \usepackage{comment}
